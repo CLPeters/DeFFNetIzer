@@ -39,7 +39,7 @@ import rClickclass as rC
 socket.setdefaulttimeout(10) # Times out after ten seconds now
 
 # Build Date: 10/25/2013
-deffnet_version = "2456590.75"
+deffnet_version = "2456590.80"
 deffnet_version_name = "FFNet Only"
 
 # Insert Deep Magic here:
@@ -317,7 +317,7 @@ class App:
             tkMessageBox.showinfo("The De-FFNet-izer","The De-FFNet-izer was unable to check for updates. If this is a recurring problem, you may wish to turn off the update checking in the Preferences.")
         else:
             if float(latest) > float(self.version):
-                tkMessageBox.showinfo("The De-FFNet-izer","You are currently running version %s, but version %s is available from the website." % (self.version, latest))
+                tkMessageBox.showinfo("The De-FFNet-izer","You are currently running version %s, but version %s is available from http://www.deffnetizer.com" % (self.version, latest))
 
     def displayabout(self):
         tkMessageBox.showinfo("The De-FFNet-izer","""The De-FFNet-izer is copyright 2005 by Jonathan Rosebaugh.
