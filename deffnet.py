@@ -50,14 +50,13 @@ def fixhtml(source):
    
     return fixer.sub(r'\1\2',source)    
 
-
 class ExceptionBox(tkSimpleDialog.Dialog):
     def __init__(self, parent, title = None, exceptiontext = ""):
         self.exceptiontext = exceptiontext
         tkSimpleDialog.Dialog.__init__(self, parent, title)
        
     def body(self, master):
-        label = Label(master, text = "Please submit a support ticket ( http://www.clpnetworks.com/contact/ ) with the information below:")
+        label = Label(master, text = "Please submit a bug report at http://groups.google.com/group/deffnet/ with the information below:")
         label.grid(row=0)
        
         frame = Frame(master)
@@ -92,7 +91,6 @@ class Pref(tkSimpleDialog.Dialog):
     def __init__(self, parent, title = None, appobj = None):
         self.appobj = appobj
         tkSimpleDialog.Dialog.__init__(self, parent, title)
-
        
     def body(self, master):
         self.location = self.appobj.location
@@ -164,8 +162,6 @@ class Pref(tkSimpleDialog.Dialog):
         self.entryboxes['Template'].delete(0,END)
         self.entryboxes['Template'].insert(0, self.templatepath)
 
-
-
 class App:
 
     def __init__(self, master):
@@ -209,7 +205,6 @@ class App:
         self.menus['file'].add_command(label="Quit", command=self.quitit)
        
         self.master.config(menu=self.menus['main'])
-
         self.master.protocol("WM_DELETE_WINDOW", self.quitit)        
 
         self.frames['Story'] = Frame(self.master, borderwidth=1, relief=RIDGE)
@@ -250,7 +245,6 @@ class App:
         self.labels['NumChaps'] = Label(self.frames['Story'], text="")
         self.labels['NumChaps'].grid(row=2, column=2, sticky=W)
        
-       
         self.labels['Chapters'] = Label(self.frames['Chapters'], text="Chapters:")
         self.labels['Chapters'].grid(row=0, column=0, sticky=E)
        
@@ -259,7 +253,6 @@ class App:
        
         self.buttons['Chapters'] = Button(self.frames['Chapters'], text="Fetch", state=DISABLED, command=self.handlechapters)
         self.buttons['Chapters'].grid(row=0, column=2)
-       
 
         self.labels['Directory'] = Label(self.frames['Directory'], text="Directory Name:")
         self.labels['Directory'].grid(row=1, column=0, sticky=E)
@@ -267,7 +260,6 @@ class App:
         self.entryboxes['Directory'].grid(row = 1, column=1, sticky=W)
         self.buttons['Directory'] = Button(self.frames['Directory'], text="Save", state=DISABLED, command=self.savefiles)
         self.buttons['Directory'].grid(row=1, column=2)
-       
        
         self.labels['Advanced'] = Label(self.frames['Advanced'], text="Advanced Options - Please read documentation first")
         self.labels['Advanced'].grid(row=0, column=0, columnspan=2)
@@ -282,7 +274,6 @@ class App:
         self.labels['Version'].grid(row=1, column=2, sticky=E)
 
         self.misc['Oneshot'] = Checkbutton(self.frames['Advanced'], text = "Oneshot", state=DISABLED, variable=self.oneshot)
-       
 
         self.labels['Encoding'] = Label(self.frames['Advanced'], text = "Override Encoding:")
         self.labels['Encoding'].grid(row=2, column=0, sticky=W)
@@ -301,7 +292,6 @@ class App:
         self.checkupdates()
        
         self.checkprefsset()
-
 
     def checkprefsset(self):
         if self.location is "" or self.templatepath is "":
@@ -352,10 +342,7 @@ You should have received a copy of the GNU General Public License along with thi
             except ValueError:
                 self.setstatus("Invalid Story ID", True)
                 return
-
-
-
-   
+            
             self.setstatus("Retrieving story info")
             self.soups = {}
             source = self.retrieveChapter(1)
@@ -368,8 +355,7 @@ You should have received a copy of the GNU General Public License along with thi
             self.labels['NumChaps']['text'] = self.numchaps
             self.entryboxes['Chapters']['state'] = NORMAL
             self.buttons['Chapters']['state'] = NORMAL
-   
-   
+
             self.entryboxes['Chapters'].delete(0,END)
             self.entryboxes['Directory'].delete(0,END)
             self.entryboxes['Directory']['state'] = DISABLED
@@ -379,8 +365,7 @@ You should have received a copy of the GNU General Public License along with thi
             self.completedenable(False)        
             self.completedchecked(False)
             self.oneshotchecked(False)
-   
-       
+
             self.setstatus("Ready")
         except:
             builder = cStringIO.StringIO()
@@ -389,7 +374,6 @@ You should have received a copy of the GNU General Public License along with thi
             traceback.print_exc(file=builder)
             e = ExceptionBox(root, "Exception", builder.getvalue())
 
-   
     def handlechapters(self):
         try:
             # parse and retrieve chapters.
@@ -424,7 +408,6 @@ You should have received a copy of the GNU General Public License along with thi
                 self.oneshotshow()
                 self.oneshotenable(True)
    
-   
             self.completedchecked(False)
             self.oneshotchecked(False)
             # check box if necessary
@@ -450,14 +433,12 @@ You should have received a copy of the GNU General Public License along with thi
             traceback.print_exc(file=builder)
             e = ExceptionBox(root, "Exception", builder.getvalue())
 
-
     def completedshow(self):
         if self.chaptercheck == "completed":
             return
         self.misc['Oneshot'].grid_forget()
         self.misc['Completed'].grid(row=1, column=0, sticky=W)
         self.chaptercheck = "oneshot"
-
    
     def completedenable(self,tf):
         if tf:
@@ -535,7 +516,6 @@ You should have received a copy of the GNU General Public License along with thi
             if not os.path.exists(os.path.join(self.templatepath,'normal.html')):
                 self.vileerror("The templates cannot be found.")
                 return
-   
    
             d = self.entryboxes['Directory'].get()
             workdir = os.path.join(self.location, d)
@@ -622,7 +602,6 @@ You should have received a copy of the GNU General Public License along with thi
             traceback.print_exc(file=builder)
             e = ExceptionBox(root, "Exception", builder.getvalue())
 
-       
     def decodeit(self, text):
         mycodecs = list(self.codecs)
         successful = False # Recursion probably isn't the answer here
@@ -820,7 +799,6 @@ You should have received a copy of the GNU General Public License along with thi
     </body>
     </html>""" % {'chap': self.numchaps}
         return page
-       
        
     def genPage(self, data, chapnum, completed=0, templates=None):
         if completed==1 and self.numchaps==1 and templates.has_key('oneshot'):
