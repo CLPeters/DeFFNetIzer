@@ -63,7 +63,7 @@ def openAnything(source, etag=None, lastmodified=None, agent=USER_AGENT):
     if source == '-':
         return sys.stdin
 
-    if urlparse.urlparse(source)[0] == 'http':
+    if urlparse.urlparse(source)[0] == 'https':
         # open URL with urllib2
         request = urllib2.Request(source)
         request.add_header('User-Agent', agent)
