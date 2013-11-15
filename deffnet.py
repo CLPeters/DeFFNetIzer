@@ -57,7 +57,7 @@ class ExceptionBox(tkSimpleDialog.Dialog):
         tkSimpleDialog.Dialog.__init__(self, parent, title)
        
     def body(self, master):
-        label = Label(master, text = "Please submit a support ticket ( http://www.clpnetworks.com/contact/ ) with the information below:")
+        label = Label(master, text = "Please submit a bug report at http://groups.google.com/group/deffnet/ ) with the information below:")
         label.grid(row=0)
        
         frame = Frame(master)
